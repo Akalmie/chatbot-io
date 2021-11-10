@@ -8,20 +8,6 @@ body {
  .well {
   margin-top: 35px;
 }
-.vertical-center {
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-.vertical-center .container-fluid {
-  flex-grow:1
-}
-
-h1 {
-  margin: 24px 0;
-}
 
 .wrapper1 .sidebar{
   margin:0;
@@ -33,12 +19,11 @@ h1 {
   overflow: auto;
 }
 .wrapper1 .sidebar .profile{
-  margin-bottom: 5vh;
+  margin-bottom: 4vh;
   text-align: center;
 }
 
 .wrapper1 .sidebar .profile img{
-  
   width: 40%;
   height: 40px;
   border-radius: 20%;
@@ -50,8 +35,8 @@ h1 {
   margin: 10px 10 5px;
 }
 
-.message{
-  height: 60vh;
-  width: 80vh;
+.message-content{
+  height: 60%;
+  width: 70%;
   overflow: hidden visible auto;
 }

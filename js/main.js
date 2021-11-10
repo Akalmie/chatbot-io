@@ -13,9 +13,9 @@ class Chat {
     let hourminute = date.getHours() + ":" + date.getMinutes();
     return `
     <div class ="row">
-      <div class = "col-6 mt-4">
+      <div class = "col-6 mt-2 mb-2 col-md-offset-12">
         <div class="card">
-          <h5 class="card-header">
+          <h5 align = "center" class="card-header">
             <img width ="30px" class ="rounded-circle" src="${avatar}">
             <span>${author}</span>
           </h5>
@@ -32,8 +32,8 @@ class Chat {
     const {author, avatar, text} = message;
     const date = new Date();
     let hourminute = date.getHours() + ":" + date.getMinutes();
-    return `    
-      <div class = "col-6 mt-4">
+    return ` 
+      <div class = "col-6 ">
         <div class="card mb-2">
           <h5 class="card-header">
             <img width ="30px" class ="rounded-circle" src="${avatar}">
@@ -50,14 +50,14 @@ class Chat {
   renderMessages(){
     return `    
       <div class = "col-md-6 col-md-offset-3 well">
-        <div class ="message row"></div>
+      <div class ="message-content row"></div>
         ${this.renderTypingMessages()}
     </div>`;
   }
 
   renderTypingMessages(){
     return `
-      <div class ="row "> 
+      <div class ="typing-message row"> 
         <div class="col-9 ">
           <input type="text" class="form-control" placeholder ="Message" id="Message" aria-label="Message"/>
         </div>
@@ -95,6 +95,25 @@ class Chat {
     `;
   }
 
+  typingMessage(){
+    const el= document.querySelector('.typing-message input');
+    //const el= document.querySelector('.typing-message button');
+    const messageuser= document.querySelector('.message-content');
+    el.addEventListener('keypress',(e) => {
+      const text = e.currentTarget.value;
+      if (e.keyCode === 13){
+        const message = {
+          author : 'user',
+          avatar : '../images/user.png',
+          text 
+        };
+        messageuser.innerHTML += this.renderMessagesSend(message);
+        e.currentTarget.value ='';
+      }
+    });
+
+  }
+
   run (){
     const contacts = [{
       name : 'Astroboy',
@@ -113,6 +132,7 @@ class Chat {
     this.el.innerHTML += this.renderContacts(contacts);
     //this.el.innerHTML += this.renderHeader();
     this.el.innerHTML += this.renderMessages();
+    this.typingMessage();
   }
 }
 
