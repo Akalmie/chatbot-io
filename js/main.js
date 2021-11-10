@@ -2,7 +2,8 @@
 
 class Chat {
   constructor(){
-    this.el=document.querySelector("#app");
+    this.el=document.querySelector("#content");
+    this.app=this.el=document.querySelector("#app");
     this.run();
   }
 
@@ -48,31 +49,24 @@ class Chat {
 
   renderMessages(){
     return `    
-    <div class = "col-md-6 col-md-offset-3 well">
-
-              <!--message--> 
-      <div class ="message row"></div>
-      ${this.renderTypingMessages()}
-      
+      <div class = "col-md-6 col-md-offset-3 well">
+        <div class ="message row"></div>
+        ${this.renderTypingMessages()}
     </div>`;
   }
 
   renderTypingMessages(){
     return `
- 
-            <!--message--> 
-            
-                <!--typing message-->
-                <div class ="row "> 
-                    <div class="col-9 ">
-                      <input type="text" class="form-control" placeholder ="Message" id="Message" aria-label="Message"/>
-                    </div>
-                  <div class='col-1'>              
-                    <div class="d-grid gap-2">
-                      <button class="btn btn-default btn-block" type="submit">Envoyer</button>
-                    </div>
-                  </div>
-            </div>
+      <div class ="row "> 
+        <div class="col-9 ">
+          <input type="text" class="form-control" placeholder ="Message" id="Message" aria-label="Message"/>
+        </div>
+        <div class='col-1'>              
+          <div class="d-grid gap-2">
+            <button class="btn btn-default btn-block" type="submit">Envoyer</button>
+          </div>
+        </div>
+      </div>
       `;
   }
 
@@ -83,11 +77,11 @@ class Chat {
   renderContact(contact){
     const { avatar, name} =  contact;
     return `
-        <div id = "profile" class="profile mt-4" >
-          <img src="${avatar}" alt="profile_picture" >
-          <h5>${name}</h5>
-        </div>
-        <hr>
+      <div id = "profile" class="profile mt-4" >
+        <img src="${avatar}" alt="profile_picture" >
+        <h5>${name}</h5>
+      </div>
+      <hr>
     `;
   }
 
@@ -98,7 +92,6 @@ class Chat {
         ${contacts.map((contact) => this.renderContact(contact)).join('')}     
       </div>
     </div>
-    
     `;
   }
 
