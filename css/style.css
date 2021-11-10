@@ -1,0 +1,57 @@
+body {
+	font:12px arial;
+	color: #222;
+	text-align:center;
+  /*background-image: url('../images/block.gif');
+    background-size: cover;*/
+ }
+ .well {
+  margin-top: 35px;
+}
+.vertical-center {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.vertical-center .container-fluid {
+  flex-grow:1
+}
+
+h1 {
+  margin: 24px 0;
+}
+
+.wrapper1 .sidebar{
+  margin:0;
+  padding: 0;
+  width: 15vh;
+  background-color: rgba(111, 113, 116, 0.8);
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+.wrapper1 .sidebar .profile{
+  margin-bottom: 5vh;
+  text-align: center;
+}
+
+.wrapper1 .sidebar .profile img{
+  
+  width: 60%;
+  height: 60px;
+  border-radius: 20%;
+  margin: 0 auto;
+}
+
+.wrapper1 .sidebar .profile h5{
+  color: #1b1b1b;
+  margin: 10px 10 5px;
+}
+
+.message{
+  height: 60vh;
+  width: 80vh;
+  overflow: hidden visible auto;
+}
