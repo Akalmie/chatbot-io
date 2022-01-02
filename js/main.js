@@ -13,7 +13,7 @@ class Chat {
     let hourminute = date.getHours() + ":" + date.getMinutes();
     return `
     <div class ="row">
-      <div class = "col-6 mt-2 mb-2 col-md-offset-12">
+      <div class = "col-6 mt-2 mb-2 col-md-offset-7">
         <div class="card">
           <h5 class="card-header">
             <img width ="30px" class ="rounded-circle" src="${avatar}">
@@ -52,7 +52,7 @@ class Chat {
     return `    
       <div class = "col-md-6 col-md-offset-3 well">
       <div class ="message-content row"></div>
-      <div class ="message-content-bot row"></div>
+     
         ${this.renderTypingMessages()}
     </div>
     `;
@@ -195,7 +195,7 @@ class Chat {
             });
         break;
         case 'Help':
-          url = "https://api.giphy.com/v1/stickers/random?api_key=PC9DJk3HROykezV9gWHhT8sDc18sLZTS&tag=help&rating=pg-13";
+          url = "https://api.giphy.com/v1/gifs/random?api_key=PC9DJk3HROykezV9gWHhT8sDc18sLZTS&tag=help&rating=g";
           fetch(url)
             .then(response => response.json())
             .then(json => {

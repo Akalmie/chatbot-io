@@ -2,10 +2,6 @@ body {
 	font:12px arial;
 	color: #222;
 	text-align:center;
-  /*background-image: url('../images/block.gif');
-    background-size: cover;*/
-    
-
  }
  .well {
   margin-top: 35px;
@@ -26,8 +22,8 @@ body {
 }
 
 .wrapper1 .sidebar .profile img{
-  width: 40%;
-  height: 40px;
+  width: 60%;
+  height: 60px;
   border-radius: 20%;
   margin: 0 auto;
 }
@@ -39,7 +35,9 @@ body {
 
 .message-content{
   height: 60%;
-  width: 70%;
+  width: 100%;
   overflow: hidden visible auto;
-  
+  margin:0;
+  padding : 0;  
 }
+
