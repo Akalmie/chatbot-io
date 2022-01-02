@@ -173,25 +173,19 @@ class Chat {
             .then(response => response.json())
             .then(data => {
               let botmessage = data.url
-              //let botdescription = data.explanation;
+              let botdescription = data.explanation;
               const message = {
                 author: 'NASA',
                 avatar: '../images/astronaut.png',
-                text: `<div class ="message-content-bot row"><img src="${botmessage}" /><br> Photo prise le : ${frenchdate}<br> </div>`,
+                text: `<div class ="message-content-bot row"><img src="${botmessage}" /><br> Photo prise le : ${frenchdate}<br><br>${botdescription} </div>`,
               };
               const messagereactionCyril = {
                 author: 'Cyril',
                 avatar: '../images/cyril.jpg',
                 text: `Mouais, je préfère les chats`,
               };
-              const messagereactionChuck = {
-                author: 'Chuck',
-                avatar: '../images/joke.jpg',
-                text: `<div class ="message-content-bot row"><img src="../images/chuck.gif" /></div>`,
-              };
               messagebot.innerHTML += this.renderMessagesReceived(message);
               messagebot.innerHTML += this.renderMessagesReceived(messagereactionCyril);
-              messagebot.innerHTML += this.renderMessagesReceived(messagereactionChuck);
             });
         break;
         case 'Help':
