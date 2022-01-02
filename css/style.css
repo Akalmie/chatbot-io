@@ -4,6 +4,8 @@ body {
 	text-align:center;
   /*background-image: url('../images/block.gif');
     background-size: cover;*/
+    
+
  }
  .well {
   margin-top: 35px;
@@ -39,4 +41,5 @@ body {
   height: 60%;
   width: 70%;
   overflow: hidden visible auto;
+  
 }
