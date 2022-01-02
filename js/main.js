@@ -1,21 +1,21 @@
 'use strict';
 
 class Chat {
-  constructor(){
-    this.el=document.querySelector("#content");
-    this.app=this.el=document.querySelector("#app");
+  constructor() {
+    this.el = document.querySelector("#content");
+    this.app = this.el = document.querySelector("#app");
     this.run();
   }
 
-  renderMessagesSend(message){
-    const {author, avatar, text} = message;
+  renderMessagesSend(message) {
+    const { author, avatar, text } = message;
     const date = new Date();
     let hourminute = date.getHours() + ":" + date.getMinutes();
     return `
     <div class ="row">
       <div class = "col-6 mt-2 mb-2 col-md-offset-12">
         <div class="card">
-          <h5 align = "center" class="card-header">
+          <h5 class="card-header">
             <img width ="30px" class ="rounded-circle" src="${avatar}">
             <span>${author}</span>
           </h5>
@@ -28,13 +28,14 @@ class Chat {
     </div>`;
   }
 
-  renderMessagesReceived(message){
-    const {author, avatar, text} = message;
+  renderMessagesReceived(message) {
+    const { author, avatar, text } = message;
     const date = new Date();
     let hourminute = date.getHours() + ":" + date.getMinutes();
     return ` 
-      <div class = "col-6 ">
-        <div class="card mb-2">
+    <div class ="row">
+      <div class = "col-6 mb-2 ">
+        <div class="card">
           <h5 class="card-header">
             <img width ="30px" class ="rounded-circle" src="${avatar}">
             <span>${author}</span>
@@ -44,20 +45,22 @@ class Chat {
           <p style="text-align:right" class="text-muted">${hourminute}</small>
         </div>
       </div>
-    </div>`;
+    </div> `;
   }
 
-  renderMessages(){
+  renderMessages() {
     return `    
       <div class = "col-md-6 col-md-offset-3 well">
       <div class ="message-content row"></div>
+      <div class ="message-content-bot row"></div>
         ${this.renderTypingMessages()}
-    </div>`;
+    </div>
+    `;
   }
 
-  renderTypingMessages(){
+  renderTypingMessages() {
     return `
-      <div class ="typing-message row"> 
+      <div class ="typing-message row">  
         <div class="col-9 ">
           <input type="text" class="form-control" placeholder ="Message" id="Message" aria-label="Message"/>
         </div>
@@ -66,26 +69,21 @@ class Chat {
             <button class="btn btn-default btn-block" type="submit">Envoyer</button>
           </div>
         </div>
-      </div>
-      `;
+      </div>`;
   }
 
-  renderHeader(){
-
-  }
-
-  renderContact(contact){
-    const { avatar, name} =  contact;
+  renderContact(contact) {
+    const { avatar, author } = contact;
     return `
       <div id = "profile" class="profile mt-4" >
         <img src="${avatar}" alt="profile_picture" >
-        <h5>${name}</h5>
+        <h5>${author}</h5>
       </div>
       <hr>
     `;
   }
 
-  renderContacts(contacts){
+  renderContacts(contacts) {
     return `
     <div class="wrapper1">
       <div class="sidebar">    
@@ -95,42 +93,103 @@ class Chat {
     `;
   }
 
-  typingMessage(){
-    const el= document.querySelector('.typing-message input');
-    //const el= document.querySelector('.typing-message button');
-    const messageuser= document.querySelector('.message-content');
-    el.addEventListener('keypress',(e) => {
+  typingMessage() {
+    const el = document.querySelector('.typing-message input');
+    const messageuser = document.querySelector('.message-content');
+    const messagebot = document.querySelector('.message-content');
+    el.addEventListener('keypress', (e) => {
       const text = e.currentTarget.value;
-      if (e.keyCode === 13){
+      switch (text) {
+        case 'Joker':
+          fetch("https://api.chucknorris.io/jokes/random", {
+            "method": "GET",
+          })
+            .then(response => response.json())
+            .then(data => {
+              let botmessage = data.value;
+              const message = {
+                author: 'Joker',
+                avatar: '../images/clown.jpg',
+                text : botmessage,
+              };
+              messagebot.innerHTML +=this.renderMessagesReceived(message) 
+            })
+            .catch(err => {
+              console.error(err);
+            });
+        break;
+        case 'Cyril':
+          fetch( 'https://aws.random.cat/meow')
+          .then( response => response.json() )
+          .then( data => {
+            let botmessage=data.file
+            const message = {
+              author: 'Cyril',
+              avatar: '../images/cyril.jpg',
+              text : `<div class ="message-content-bot row"><img src="${botmessage}" /></div>`,
+            };
+            messagebot.innerHTML += this.renderMessagesReceived(message);
+          } );
+        break;
+        case 'Astroboy':
+          var url = "https://api.nasa.gov/planetary/apod?api_key=nGyb4L9GhjsBPfcA5Z4q5LzxUzs5ryYDMWIQA4kE";
+          function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min) 
+          }
+          var randomDay = getRandomInt('01','30');
+          var randomMonth = getRandomInt('01','12');
+          var randomYear = getRandomInt('2000','2018');
+          var newdate = randomYear+"-"+randomMonth+"-"+randomDay
+          var frenchdate = randomDay+"-"+randomMonth+"-"+randomYear
+          url+="&date="+ newdate;
+          fetch( url )
+          .then( response => response.json() )
+          .then( data => {
+            let botmessage=data.url
+            //let botdescription = data.explanation;
+            const message = {
+              author: 'Astroboy',
+              avatar: '../images/astronaut.png',
+              text : `<div class ="message-content-bot row"><img src="${botmessage}" /><br> Photo prise le : ${frenchdate}<br> </div>`,
+            };
+            messagebot.innerHTML += this.renderMessagesReceived(message);
+          } );
+        break;
+
+        case 'help':
+          alert ("help");
+          break;
+      }
+
+
+      if (e.keyCode === 13) {
         const message = {
-          author : 'user',
-          avatar : '../images/user.png',
-          text 
+          author: 'user',
+          avatar: '../images/user.png',
+          text
         };
         messageuser.innerHTML += this.renderMessagesSend(message);
-        e.currentTarget.value ='';
+        e.currentTarget.value = '';
       }
     });
 
   }
 
-  run (){
+  run() {
     const contacts = [{
-      name : 'Astroboy',
-      avatar : '../images/astronaut.png'
-    },{
-      name : 'Ghibli',
-      avatar : '../images/mononoke.jpg'
-    },{
-      name : 'Joker',
-      avatar : '../images/clown.jpg'
-    },{
-      name : 'Cyril',
-      avatar : '../images/cyril.jpg'
+      author: 'Astroboy',
+      avatar: '../images/astronaut.png'
+    }, {
+      author: 'Joker',
+      avatar: '../images/clown.jpg'
+    }, {
+      author: 'Cyril',
+      avatar: '../images/cyril.jpg'
     }];
 
     this.el.innerHTML += this.renderContacts(contacts);
-    //this.el.innerHTML += this.renderHeader();
     this.el.innerHTML += this.renderMessages();
     this.typingMessage();
   }
