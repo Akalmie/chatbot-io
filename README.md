@@ -1,4 +1,4 @@
-# Chatbot-io by David PINHO
+# Chatbot-io by Akalmie
 ___
 Application de chat permettant d'appeler un bot parmis une sélection de 4 et qui sont chacun lié à une API qui lui est propre. Une fois appelé, le bot renverra le résultat d'une requête faite à une API. 
 ##### Il est important de respecter la casse pour appeler un bot
